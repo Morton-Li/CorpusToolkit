@@ -1,5 +1,5 @@
 [project]
-name = "CorpusToolkit"
+name = "CorpusKit"
 dynamic = ["version"]
 description = "Corpus analysis and processing toolkit"
 readme = "README.md"
@@ -20,7 +20,7 @@ classifiers = [
 ]
 dependencies = [
   "datasketch~=1.6.5", "pandas~=2.2.3", "torch~=2.7.0", "transformers~=4.52.3", "accelerate~=1.7.0",
-  "pyarrow~=20.0.0",
+  "pyarrow~=20.0.0", "tqdm~=4.67.1",
 ]
 
 [project.optional-dependencies]
