@@ -55,7 +55,7 @@ def compute_perplexity(
             # 截断列表
             batch_texts = texts[i:i + batch_size]
             inputs = tokenizer(batch_texts, return_tensors="pt", padding=True).to(model.device)
-            outputs = model(**inputs, use_cache=True)
+            outputs = model(**inputs, use_cache=False)
             shift_labels = functional.pad(inputs.input_ids, (0, 1), value=tokenizer.pad_token_id)[..., 1:].contiguous()  # [batch, 1+seq]
             loss = functional.cross_entropy(
                 input=outputs.logits.view(-1, model.config.vocab_size),  # [batch*seq, vocab]
@@ -68,6 +68,10 @@ def compute_perplexity(
             valid_mask = shift_labels != tokenizer.pad_token_id
             loss_per_sample = (loss * valid_mask).sum(dim=1) / valid_mask.sum(dim=1)
             ppls.extend([round(ppl.item(), 4) for ppl in torch.exp(loss_per_sample)])
+
+            del inputs, outputs, shift_labels, loss, loss_per_sample, valid_mask
+            if model.device.type == 'cuda':
+                torch.cuda.empty_cache()
 
     if return_format == list:
         return ppls

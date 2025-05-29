@@ -1,6 +1,10 @@
 name: Python Compatibility Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
 
 jobs:
   test:
@@ -9,8 +13,9 @@ jobs:
     runs-on: ubuntu-24.04
 
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.13", "3.12", "3.11", "3.10", "3.9"]
+        python-version: ["3.13", "3.12", "3.11", "3.10"]
 
     steps:
       - name: Checkout code
