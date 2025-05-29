@@ -1,0 +1,32 @@
+[project]
+name = "CorpusToolkit"
+version = "0.1.0"
+description = "Corpus analysis and processing toolkit"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+authors = [
+  {name = "Morton Li", email = "Morton.L@Outlook.com"}
+]
+keywords = [
+  "corpus", "text analysis", "text cleaning", "text processing", "natural language processing", "NLP"
+]
+classifiers = [
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+  "datasketch~=1.6.5", "pandas~=2.2.3", "torch~=2.7.0", "transformers~=4.52.3", "accelerate~=1.7.0",
+  "pyarrow~=20.0.0",
+]
+
+[project.optional-dependencies]
+dev = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["CorpusToolkit"]
+
+[build-system]
+requires = ["hatchling~=1.27.0"]
+build-backend = "hatchling.build"
