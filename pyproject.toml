@@ -1,6 +1,6 @@
 [project]
 name = "CorpusToolkit"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Corpus analysis and processing toolkit"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -28,6 +28,9 @@ dev = []
 
 [tool.hatch.build.targets.wheel]
 packages = ["CorpusToolkit"]
+
+[tool.hatch.version]
+path = "CorpusToolkit/__init__.py"
 
 [build-system]
 requires = ["hatchling~=1.27.0"]

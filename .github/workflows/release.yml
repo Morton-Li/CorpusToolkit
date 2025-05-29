@@ -32,7 +32,8 @@ jobs:
           echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
           echo "version=$version" >> $GITHUB_OUTPUT
 
-          if [[ "$version" == *"rc"* || "$version" == *"alpha"* || "$version" == *"beta"* ]]; then
+          lower_version=$(echo "$version" | tr '[:upper:]' '[:lower:]')
+          if [[ "$lower_version" == *"rc"* || "$lower_version" == *"alpha"* || "$lower_version" == *"beta"* ]]; then
             echo "prerelease=true" >> $GITHUB_OUTPUT
           else
             echo "prerelease=false" >> $GITHUB_OUTPUT
