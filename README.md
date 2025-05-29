@@ -7,7 +7,7 @@
 ## 📦 Installation / 安装
 
 ```bash
-pip install CorpusToolkit
+pip install CorpusKit
 ```
 
 或从源码安装：

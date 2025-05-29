@@ -1,5 +1,5 @@
 [project]
-name = "CorpusToolkit"
+name = "CorpusKit"
 dynamic = ["version"]
 description = "Corpus analysis and processing toolkit"
 readme = "README.md"
