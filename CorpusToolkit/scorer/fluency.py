@@ -1,21 +1,38 @@
+from typing import Union
+
 import pandas
-import torch
-from torch.nn import functional
 from tqdm import tqdm
-from transformers import AutoTokenizer, AutoModelForCausalLM
 
 _tokenizer = None
 _model = None
 
+def _check_and_import_dependencies():
+    """
+    检查依赖项是否已安装
+    :return: bool
+    """
+    try:
+        import transformers, torch, accelerate
+    except ImportError:
+        # 提醒用户：在使用神经网络相关功能时需要 pip install CorpusKit[ml]
+        raise ImportError(
+            '⚠️ 请执行 pip install CorpusKit[ml] 以使用神经网络相关功能。\n'
+            '⚠️ Please run "pip install CorpusKit[ml]" to use neural network related features.'
+        )
+
 def get_tokenizer(model_name: str = 'Qwen/Qwen3-0.6B-Base'):
     global _tokenizer
     if _tokenizer is None:
+        _check_and_import_dependencies()
+        from transformers import AutoTokenizer
         _tokenizer = AutoTokenizer.from_pretrained(model_name)
     return _tokenizer
 
 def get_model(model_name: str = 'Qwen/Qwen3-0.6B-Base'):
     global _model
     if _model is None:
+        _check_and_import_dependencies()
+        from transformers import AutoModelForCausalLM
         _model = AutoModelForCausalLM.from_pretrained(
             model_name,
             torch_dtype='auto',
@@ -24,12 +41,12 @@ def get_model(model_name: str = 'Qwen/Qwen3-0.6B-Base'):
     return _model
 
 def compute_perplexity(
-    texts: str | list[str] | pandas.DataFrame | pandas.Series,
+    texts: Union[str | list[str] | pandas.DataFrame | pandas.Series],
     batch_size: int = 32,
     model_name: str = 'Qwen/Qwen3-0.6B-Base',
     progress_bar: bool = True,
     return_format: type = list
-) -> list[float] | pandas.Series:
+) -> Union[list[float] | pandas.Series]:
     """
     使用 Qwen3-0.6B 对单句中文文本进行困惑度打分
     :param texts: 输入文本，可以是单个字符串、字符串列表、pandas DataFrame 或 pandas Series
@@ -38,6 +55,10 @@ def compute_perplexity(
     :param progress_bar: 是否显示进度条
     :param return_format: 返回格式，可以是 list 或 pandas.Series
     """
+    _check_and_import_dependencies()
+    import torch
+    from torch.nn import functional
+
     if isinstance(texts, str):
         texts = [texts]
     elif isinstance(texts, pandas.DataFrame):
