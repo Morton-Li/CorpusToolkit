@@ -18,6 +18,24 @@ cd CorpusToolkit
 pip install .
 ```
 
+<details>
+<summary><strong>⚠️ 注意 / Note</strong></summary>
+
+如需使用机器学习相关功能，请确保安装了 `ml` 可选依赖项：  
+To use neural network-related features, make sure to install the optional dependencies group `ml`:  
+
+* For PyPI install / 使用 PyPI 安装：
+  ```bash
+  pip install CorpusKit[ml]
+  ```
+
+* For source install / 从源码安装：
+  ```bash
+  pip install .[ml]
+  ```
+
+</details>
+
 ---
 
 ## 🧰 模块功能简介 / Module Overview
@@ -27,6 +45,7 @@ pip install .
 | `CorpusToolkit.scorer`            | 计算中文语料的质量评分，如困惑度（Perplexity）         |
 | `CorpusToolkit.Cleaner`           | 标点规范、空白符清洗、HTML 实体解码、emoji 过滤等语料清洗功能 |
 | `CorpusToolkit.DuplicateDetector` | 基于 MinHash + LSH 实现语句级重复检测           |
+| `CorpusToolkit.split_sentence`    | 中文文本长句分割工具                           |
 
 ---
 
@@ -75,6 +94,8 @@ for text in sample_texts:
 duplicates = detector.find_all_duplicates()
 print("All duplicate groups:", duplicates)  # All duplicate groups: {1: [3, 2]}
 ```
+
+> 更多示例请参考 [examples](./examples) 目录。
 
 ---
 
