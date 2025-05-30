@@ -41,12 +41,12 @@ def get_model(model_name: str = 'Qwen/Qwen3-0.6B-Base'):
     return _model
 
 def compute_perplexity(
-    texts: Union[str | list[str] | pandas.DataFrame | pandas.Series],
+    texts: Union[str, list[str], pandas.DataFrame, pandas.Series],
     batch_size: int = 32,
     model_name: str = 'Qwen/Qwen3-0.6B-Base',
     progress_bar: bool = True,
     return_format: type = list
-) -> Union[list[float] | pandas.Series]:
+) -> Union[list[float], pandas.Series]:
     """
     使用 Qwen3-0.6B 对单句中文文本进行困惑度打分
     :param texts: 输入文本，可以是单个字符串、字符串列表、pandas DataFrame 或 pandas Series
