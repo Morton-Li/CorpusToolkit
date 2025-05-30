@@ -1,7 +1,6 @@
 import html
 import re
 import sys
-from typing import Optional
 
 from .utils import get_punct_mappings
 

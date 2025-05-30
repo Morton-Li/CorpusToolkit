@@ -3,7 +3,7 @@ name = "CorpusKit"
 dynamic = ["version"]
 description = "Corpus analysis and processing toolkit"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 license = { text = "Apache-2.0" }
 authors = [
   {name = "Morton Li", email = "Morton.L@Outlook.com"}
@@ -12,6 +12,7 @@ keywords = [
   "corpus", "text analysis", "text cleaning", "text processing", "natural language processing", "NLP"
 ]
 classifiers = [
+  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -19,12 +20,14 @@ classifiers = [
   "License :: OSI Approved :: Apache Software License",
 ]
 dependencies = [
-  "datasketch~=1.6.5", "pandas~=2.2.3", "torch~=2.7.0", "transformers~=4.52.3", "accelerate~=1.7.0",
-  "pyarrow~=20.0.0",
+  "datasketch~=1.6.5", "pandas~=2.2.3", "pyarrow~=20.0.0", "tqdm~=4.67.1",
 ]
 
 [project.optional-dependencies]
 dev = []
+ml = [
+  "torch~=2.7.0", "transformers~=4.52.3", "accelerate~=1.7.0",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["CorpusToolkit"]
